@@ -148,6 +148,14 @@ const INSTALLERS: &[Installer] = &[
         },
         source: "https://antigravity.google/download",
     },
+    Installer {
+        name: "muse",
+        binary: "muse",
+        kind: InstallerKind::Shell {
+            command: "curl -fsSL https://dev.meta.ai/install.sh | bash",
+        },
+        source: "https://developer.meta.com/ai/products/muse-code/",
+    },
 ];
 
 pub(crate) fn run_install(options: InstallOptions) -> Result<(), String> {
@@ -307,6 +315,7 @@ fn normalize_installer_name(name: &str) -> String {
         "moonshot" | "kimi-code" => "kimi".to_string(),
         "github-copilot" => "copilot".to_string(),
         "agy" | "google-antigravity" => "antigravity".to_string(),
+        "muse-code" | "musecode" | "meta" | "meta-muse" => "muse".to_string(),
         value => value.to_string(),
     }
 }
@@ -402,6 +411,7 @@ mod tests {
         assert_eq!(normalize_installer_name("openai"), "codex");
         assert_eq!(normalize_installer_name("cursor-agent"), "cursor");
         assert_eq!(normalize_installer_name("agy"), "antigravity");
+        assert_eq!(normalize_installer_name("muse-code"), "muse");
     }
 
     #[test]
@@ -421,6 +431,7 @@ mod tests {
                 "kimi",
                 "copilot",
                 "antigravity",
+                "muse",
             ]
         );
     }

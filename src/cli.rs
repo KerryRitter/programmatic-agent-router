@@ -337,9 +337,9 @@ pub(crate) fn usage() -> &'static str {
   par install list
 
 Options:
-  --harness, -h <name>    claude, codex, cursor, gemini, goose, opencode, qwen, aider, amazon-q, copilot, kimi, antigravity
+  --harness, -h <name>    claude, codex, cursor, gemini, goose, opencode, qwen, aider, amazon-q, copilot, kimi, antigravity, muse
                           Shorthands: cl=claude co=codex cu=cursor g=gemini go=goose
-                          oc=opencode q=qwen k=kimi a/ai=aider aq=amazon-q cp=copilot ag=antigravity
+                          oc=opencode q=qwen k=kimi a/ai=aider aq=amazon-q cp=copilot ag=antigravity m/mu=muse
                           Meta-harness (calls back into par, composes anywhere a harness is taken):
                           fuse = run a panel · e.g. par converse --a fuse --b claude
   --provider <name>       Provider namespace when the target CLI supports one

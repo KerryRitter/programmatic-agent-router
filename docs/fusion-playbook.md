@@ -40,7 +40,7 @@ If you can't say *why* a second model would disagree, you don't need a panel.
 A panel of three Claude instances is barely better than one. The lift comes from **different model families with different training and failure modes.** Pick agents that are genuinely different:
 
 - **Reasoning-leaning** + **code-leaning** + **a wildcard** beats three of the same.
-- Good default trios: `cl,co,g` (Claude + Codex + Gemini) or `cl,co,k` (+ Kimi).
+- Good default trios: `cl,co,g` (Claude + Codex + Gemini) or `cl,co,k` (+ Kimi). `cl,co,mu` (+ Muse) adds a fourth vendor's training lineage.
 - Mix providers, not just models — different *vendors* disagree in more useful ways than different model sizes from one vendor.
 
 Sakana's framing: treat each model's specialization (coding, reasoning, creative) as a complementary strength to exploit, not a limitation to average away.

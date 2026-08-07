@@ -10,6 +10,7 @@ mod goose;
 mod invocation;
 mod kimi;
 mod meta;
+mod muse;
 mod opencode;
 mod qwen;
 
@@ -176,6 +177,12 @@ const HARNESS_SPECS: &[HarnessSpec] = &[
         shim: "agyy",
         yolo_args: &["--dangerously-skip-permissions"],
     },
+    HarnessSpec {
+        name: "muse",
+        binary: "muse",
+        shim: "musey",
+        yolo_args: &["--yolo"],
+    },
 ];
 
 type HarnessConstructor = fn() -> Box<dyn Harness>;
@@ -198,6 +205,7 @@ impl Default for HarnessFactory {
             ("opencode", opencode::new as HarnessConstructor),
             ("copilot", copilot::new as HarnessConstructor),
             ("kimi", kimi::new as HarnessConstructor),
+            ("muse", muse::new as HarnessConstructor),
             ("qwen", qwen::new as HarnessConstructor),
             // Meta-harness: a harness that calls back into `par` itself.
             ("fuse", meta::fuse as HarnessConstructor),
@@ -309,6 +317,7 @@ pub(crate) fn normalize_harness(harness: &str) -> String {
         "aq" => "amazon-q".to_string(),
         "cp" => "copilot".to_string(),
         "ag" => "antigravity".to_string(),
+        "m" | "mu" => "muse".to_string(),
         // Long aliases.
         "cursor-agent" => "cursor".to_string(),
         "open-code" => "opencode".to_string(),
@@ -318,6 +327,7 @@ pub(crate) fn normalize_harness(harness: &str) -> String {
         "amazonq" | "aws-q" | "amazon" => "amazon-q".to_string(),
         "moonshot" | "kimi-code" => "kimi".to_string(),
         "agy" | "google-antigravity" => "antigravity".to_string(),
+        "muse-code" | "musecode" | "meta" | "meta-muse" => "muse".to_string(),
         value => value.to_string(),
     }
 }
@@ -417,6 +427,8 @@ mod tests {
         assert_eq!(normalize_harness("cursor-agent"), "cursor");
         assert_eq!(normalize_harness("aws-q"), "amazon-q");
         assert_eq!(normalize_harness("agy"), "antigravity");
+        assert_eq!(normalize_harness("muse-code"), "muse");
+        assert_eq!(normalize_harness("meta"), "muse");
     }
 
     #[test]
@@ -427,6 +439,7 @@ mod tests {
         assert_eq!(normalize_harness("k"), "kimi");
         assert_eq!(normalize_harness("cu"), "cursor");
         assert_eq!(normalize_harness("aq"), "amazon-q");
+        assert_eq!(normalize_harness("mu"), "muse");
     }
 
     #[test]
