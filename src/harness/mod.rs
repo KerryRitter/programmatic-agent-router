@@ -12,6 +12,7 @@ mod kimi;
 mod meta;
 mod muse;
 mod opencode;
+mod pi;
 mod qwen;
 
 use std::collections::HashMap;
@@ -183,6 +184,12 @@ const HARNESS_SPECS: &[HarnessSpec] = &[
         shim: "musey",
         yolo_args: &["--yolo"],
     },
+    HarnessSpec {
+        name: "pi",
+        binary: "pi",
+        shim: "piy",
+        yolo_args: &[],
+    },
 ];
 
 type HarnessConstructor = fn() -> Box<dyn Harness>;
@@ -207,6 +214,7 @@ impl Default for HarnessFactory {
             ("kimi", kimi::new as HarnessConstructor),
             ("muse", muse::new as HarnessConstructor),
             ("qwen", qwen::new as HarnessConstructor),
+            ("pi", pi::new as HarnessConstructor),
             // Meta-harness: a harness that calls back into `par` itself.
             ("fuse", meta::fuse as HarnessConstructor),
         ]
@@ -318,6 +326,7 @@ pub(crate) fn normalize_harness(harness: &str) -> String {
         "cp" => "copilot".to_string(),
         "ag" => "antigravity".to_string(),
         "m" | "mu" => "muse".to_string(),
+        "p" => "pi".to_string(),
         // Long aliases.
         "cursor-agent" => "cursor".to_string(),
         "open-code" => "opencode".to_string(),
@@ -328,6 +337,7 @@ pub(crate) fn normalize_harness(harness: &str) -> String {
         "moonshot" | "kimi-code" => "kimi".to_string(),
         "agy" | "google-antigravity" => "antigravity".to_string(),
         "muse-code" | "musecode" | "meta" | "meta-muse" => "muse".to_string(),
+        "pi-agent" | "pi-coding-agent" => "pi".to_string(),
         value => value.to_string(),
     }
 }
@@ -429,6 +439,7 @@ mod tests {
         assert_eq!(normalize_harness("agy"), "antigravity");
         assert_eq!(normalize_harness("muse-code"), "muse");
         assert_eq!(normalize_harness("meta"), "muse");
+        assert_eq!(normalize_harness("pi-agent"), "pi");
     }
 
     #[test]
@@ -440,6 +451,7 @@ mod tests {
         assert_eq!(normalize_harness("cu"), "cursor");
         assert_eq!(normalize_harness("aq"), "amazon-q");
         assert_eq!(normalize_harness("mu"), "muse");
+        assert_eq!(normalize_harness("p"), "pi");
     }
 
     #[test]

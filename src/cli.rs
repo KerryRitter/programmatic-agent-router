@@ -337,9 +337,9 @@ pub(crate) fn usage() -> &'static str {
   par install list
 
 Options:
-  --harness, -h <name>    claude, codex, cursor, gemini, goose, opencode, qwen, aider, amazon-q, copilot, kimi, antigravity, muse
+  --harness, -h <name>    claude, codex, cursor, gemini, goose, opencode, qwen, aider, amazon-q, copilot, kimi, antigravity, muse, pi
                           Shorthands: cl=claude co=codex cu=cursor g=gemini go=goose
-                          oc=opencode q=qwen k=kimi a/ai=aider aq=amazon-q cp=copilot ag=antigravity m/mu=muse
+                          oc=opencode q=qwen k=kimi a/ai=aider aq=amazon-q cp=copilot ag=antigravity m/mu=muse p=pi
                           Meta-harness (calls back into par, composes anywhere a harness is taken):
                           fuse = run a panel · e.g. par converse --a fuse --b claude
   --provider <name>       Provider namespace when the target CLI supports one
@@ -404,7 +404,7 @@ Resume:
   par resume -h cl <id> --print   Print the resume command for a session id
   par resume --cwd <path>         Scope to another directory
 
-  Native listing: claude, codex, opencode. Delegate resume (best-effort listing,
+  Native listing: claude, codex, opencode, pi. Delegate resume (best-effort listing,
   marked ~): cursor, gemini — resume runs the native CLI's own cwd-scoped resume.
 
 Ask (agent-to-agent):
@@ -415,7 +415,7 @@ Ask (agent-to-agent):
                                   Use a specific source session id as context
   par ask -h g -p \"...\" --max-context 8000 --dry-run
                                   Cap injected context; show the command, run nothing
-  Context sources: claude, codex, opencode (cursor/gemini cannot export transcripts)
+  Context sources: claude, codex, opencode, pi (cursor/gemini cannot export transcripts)
 
 Converse (multi-turn, two agents):
   par converse --a cl --b g -p \"<task>\"    Two agents take turns (default 6 turns)

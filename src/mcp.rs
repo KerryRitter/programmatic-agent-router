@@ -349,7 +349,7 @@ fn tools_list_result() -> Json {
         ("type", Json::Str("string".to_string())),
         (
             "description",
-            Json::Str("Optional harness filter: claude, codex, opencode, cursor, gemini (shorthands allowed).".to_string()),
+            Json::Str("Optional harness filter: claude, codex, opencode, cursor, gemini, pi (shorthands allowed).".to_string()),
         ),
     ]);
 
@@ -430,7 +430,7 @@ fn tools_list_result() -> Json {
                     (
                         "properties",
                         obj(vec![
-                            ("harness", str_prop("Source agent (claude, codex, opencode).")),
+                            ("harness", str_prop("Source agent (claude, codex, opencode, pi).")),
                             ("session", str_prop("Session id, or 'latest' / omitted for the newest in cwd.")),
                         ]),
                     ),
@@ -471,7 +471,7 @@ fn tools_list_result() -> Json {
                     (
                         "properties",
                         obj(vec![
-                            ("harness", str_prop("Source agent (claude, codex, opencode).")),
+                            ("harness", str_prop("Source agent (claude, codex, opencode, pi).")),
                             ("session", str_prop("Session id, or 'latest' / omitted for the newest in cwd.")),
                         ]),
                     ),

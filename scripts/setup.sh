@@ -165,6 +165,7 @@ supported_harnesses=(
   "copilot:copilot"
   "antigravity:agy"
   "muse:muse"
+  "pi:pi"
 )
 
 installed_harnesses=0

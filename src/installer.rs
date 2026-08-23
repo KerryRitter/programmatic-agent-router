@@ -156,6 +156,15 @@ const INSTALLERS: &[Installer] = &[
         },
         source: "https://developer.meta.com/ai/products/muse-code/",
     },
+    Installer {
+        name: "pi",
+        binary: "pi",
+        kind: InstallerKind::Direct {
+            command: "npm",
+            args: &["install", "-g", "--ignore-scripts", "@earendil-works/pi-coding-agent"],
+        },
+        source: "https://pi.dev/docs/latest",
+    },
 ];
 
 pub(crate) fn run_install(options: InstallOptions) -> Result<(), String> {
@@ -316,6 +325,7 @@ fn normalize_installer_name(name: &str) -> String {
         "github-copilot" => "copilot".to_string(),
         "agy" | "google-antigravity" => "antigravity".to_string(),
         "muse-code" | "musecode" | "meta" | "meta-muse" => "muse".to_string(),
+        "pi-agent" | "pi-coding-agent" => "pi".to_string(),
         value => value.to_string(),
     }
 }
@@ -412,6 +422,7 @@ mod tests {
         assert_eq!(normalize_installer_name("cursor-agent"), "cursor");
         assert_eq!(normalize_installer_name("agy"), "antigravity");
         assert_eq!(normalize_installer_name("muse-code"), "muse");
+        assert_eq!(normalize_installer_name("pi-coding-agent"), "pi");
     }
 
     #[test]
@@ -432,6 +443,7 @@ mod tests {
                 "copilot",
                 "antigravity",
                 "muse",
+                "pi",
             ]
         );
     }
